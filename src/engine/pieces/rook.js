@@ -22,7 +22,6 @@ export default class Rook extends Piece {
     for (let i = location.row + 1; i <= 7; i++) {
       rookAvailableMoves.push(Square.at(i, location.col));
     }
-    console.log(rookAvailableMoves);
 
     return rookAvailableMoves;
   }
