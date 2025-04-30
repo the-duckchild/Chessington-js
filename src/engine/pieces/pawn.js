@@ -67,6 +67,49 @@ export default class Pawn extends Piece {
       if (location.row === 0) {
         return [];
       }
+      
+      else if (location.col == 0) {
+        let topDiagonalRightPiece = board.getPiece(
+          Square.at(location.row - 1, location.col + 1)
+        );
+
+        if (
+          topDiagonalRightPiece != undefined &&
+          topDiagonalRightPiece.player === Player.WHITE
+        ) {
+          availableMoves.push(Square.at(location.row + 1, location.col + 1));
+        }
+      } else if (location.col > 0 && location.col < 7) {
+        let topDiagonalLeftPiece = board.getPiece(
+          Square.at(location.row - 1, location.col - 1)
+        );
+        let topDiagonalRightPiece = board.getPiece(
+          Square.at(location.row - 1, location.col + 1)
+        );
+
+        if (
+          topDiagonalLeftPiece != undefined &&
+          topDiagonalLeftPiece.constructor.name != "King" &&
+          topDiagonalLeftPiece.player === Player.WHITE
+        ) {
+          availableMoves.push(Square.at(location.row - 1, location.col - 1));
+        } else if (
+          topDiagonalRightPiece != undefined &&
+          topDiagonalRightPiece.player === Player.WHITE
+        ) {
+          availableMoves.push(Square.at(location.row - 1, location.col + 1));
+        }
+      } else if (location.col === 7) {
+        let topDiagonalLeftPiece = board.getPiece(
+          Square.at(location.row - 1, location.col - 1)
+        );
+        if (
+          topDiagonalLeftPiece != undefined &&
+          topDiagonalLeftPiece.player === Player.WHITE
+        ) {
+          availableMoves.push(Square.at(location.row - 1, location.col - 1));
+        }
+      }
 
       let oneSquareAhead = board.getPiece(Square.at(location.row - 1, location.col));
 
