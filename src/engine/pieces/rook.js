@@ -10,18 +10,49 @@ export default class Rook extends Piece {
     let location = board.findPiece(this);
     // location.row, location.col
     let rookAvailableMoves = [];
-    for (let i = 0; i < location.col; i++) {
-      rookAvailableMoves.push(Square.at(location.row, i));
+
+    for (let i = location.col - 1; i >= 0; i--) {
+      let curPiece = board.getPiece(Square.at(location.row, i));
+
+      if (curPiece == undefined) {
+        rookAvailableMoves.push(Square.at(location.row, i));
+      }
+      
+      else  {break}
+      }
+      
+     
+    for (let i = location.col +1; i <= 7; i++) {
+      let curPiece = board.getPiece(Square.at(location.row, i));
+      if (curPiece == undefined) {
+        rookAvailableMoves.push(Square.at(location.row, i));
+      }
+
+      else  {break}
+      
+     
     }
-    for (let i = location.col + 1; i <= 7; i++) {
-      rookAvailableMoves.push(Square.at(location.row, i));
+    for (let i = location.row +1; i <= 7 ; i++) {
+      let curPiece = board.getPiece(Square.at(i, location.col));
+      if (curPiece == undefined) {
+
+        rookAvailableMoves.push(Square.at(i, location.col));
+      }
+
+      else  {break}
+      
     }
-    for (let i = 0; i < location.row; i++) {
-      rookAvailableMoves.push(Square.at(i, location.col));
+    for (let i = location.row - 1; i >= 0; i--) {
+      let curPiece = board.getPiece(Square.at(i, location.col));
+      if (curPiece == undefined) {
+        rookAvailableMoves.push(Square.at(i, location.col));
+        
+      }
+      else {
+        break;
     }
-    for (let i = location.row + 1; i <= 7; i++) {
-      rookAvailableMoves.push(Square.at(i, location.col));
-    }
+      }
+      
 
     return rookAvailableMoves;
   }
